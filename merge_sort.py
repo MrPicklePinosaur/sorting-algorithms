@@ -12,7 +12,7 @@ def merge_sort(arr):
      for i in arr2: #for each value that we want to insert
           sorted_insert(i,arr1)
 
-     print(arr1)
+     #print(arr1)
      return arr1
 
 def sorted_insert(n_val,host_array): #sorted insert assuming host array is sorted least to greatest
@@ -28,7 +28,7 @@ def sorted_insert_sort(arr):
      sorted_arr = []
      for v in arr:
           sorted_insert(v,sorted_arr)
-          print(sorted_arr)
+          #print(sorted_arr)
           
      
 '''

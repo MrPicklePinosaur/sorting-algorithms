@@ -4,53 +4,68 @@ import matplotlib.pyplot as plt
 import random as r
 import time as t
 
+from insertion_sort import *
+from merge_sort import *
+from bubble_sort import *
+
 #Constants
 min_size = 2
 max_size = 500
+runs = 5 #run the sort on each array multiple times, graph average
+sorts = ["insertion_sort","merge_sort","bubble_sort","sorted_insert_sort"]
 
-#The array of values that we are sorting; SHOULD NEVER BE MODIFIED BY SORTING ALGORITHMS
-org_arr = []
+data = {sort : [] for sort in sorts}
+org_arr = [] #originala array; SHOULD NOT BE MODIFIED BY SORTING ALGORITHMS
 
-#array that all sorts will be run on
-test_arr = []
-
-#generate random array, takes amount of numbers to generate
 def increment_size(amount):
-    new_arr = []
-    for i in range(amount):
-        #numbers are between 0 and 5000
-        new_arr.append(r.randint(0,5000))
-    test_arr = new_arr
-
-#creates a copy of the current test array for actual use
-def copy_arr(): 
-    new_arr = []
-    for i in org_arr:
-        new_arr.append(i)
+    new_arr = [i for i in range(amount)]
+    r.shuffle(new_arr)
     return new_arr
-        
-def bubble_sort(array):
-    length = len(array)
-    for i in range(length):
-        for j in range(length-i-1):
-            if array[j] > array[j+1]:
-                array[j],array[j+1] = array[j+1],array[j]
 
-#run the sort on each array multiple times, graph average
-runs = 5
+def copy_arr(): 
+    copied = []
+    for i in org_arr:
+        copied.append(i)
+    return copied
 
-#set up for loop to generate arrays from length 2 to length 1000
-for i in range(min_size,max_size):
-    increment_size(i)
 
-    #run each length array some amount of times, dependant on runs
-    for j in range(runs):
+for i in range(min_size,max_size+1):
+    #regenerate array
+    org_arr = increment_size(i)
+    #print(org_arr)
 
-        bubble_sort(copy_arr())
+    #Insertion sort
+    test_arr = copy_arr()
+    start_time = t.time()
+    insert_sort(test_arr)
+    total_time = t.time()-start_time
+    data["insertion_sort"].append(total_time)
 
-        copy_arr().sort()
+    #merge sort
+    test_arr = copy_arr()
+    start_time = t.time()
+    merge_sort(test_arr)
+    total_time = t.time()-start_time
+    data["merge_sort"].append(total_time)
 
-    
+    #bubble sort
+    test_arr = copy_arr()
+    start_time = t.time()
+    bubble_sort(test_arr)
+    total_time = t.time()-start_time
+    data["bubble_sort"].append(total_time)
+
+    #sorted insert sort
+    test_arr = copy_arr()
+    start_time = t.time()
+    sorted_insert_sort(test_arr)
+    total_time = t.time()-start_time
+    data["sorted_insert_sort"].append(total_time)
+
+for s in sorts: #graph the data
+    plt.plot([i for i in range(min_size,max_size+1)],data[s])
+
+plt.show()
     
 
         

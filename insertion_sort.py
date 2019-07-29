@@ -15,10 +15,10 @@ def insert_sort(arr):
                     break
      return arr
                
-
+'''
 test_arr = [i for i in range(10)]
 r.shuffle(test_arr)
 print(test_arr)
 print(insert_sort(test_arr))
-
+'''
                
