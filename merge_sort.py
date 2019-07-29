@@ -24,10 +24,26 @@ def sorted_insert(n_val,host_array): #sorted insert assuming host array is sorte
           
      host_array.append(n_val) #if array is empty
 
-
+def sorted_insert_sort(arr):
+     sorted_arr = []
+     for v in arr:
+          sorted_insert(v,sorted_arr)
+          print(sorted_arr)
+          
+     
+'''
+#merge sort
 arr = [i for i in range(200)]
 r.shuffle(arr)
 print(arr)
 merge_sort(arr)
+'''
+'''
+#sorted insert sort
+arr = [i for i in range(20)]
+r.shuffle(arr)
+print(arr)
+sorted_insert_sort(arr)
 
+'''
 
