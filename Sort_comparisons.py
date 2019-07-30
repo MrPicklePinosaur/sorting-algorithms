@@ -65,6 +65,9 @@ for i in range(min_size,max_size+1):
 for s in sorts: #graph the data
     plt.plot([i for i in range(min_size,max_size+1)],data[s])
 
+#configure graph
+plt.xlabel("Length of array")
+plt.ylabel("Runtime")
 plt.show()
     
 
